@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dua Play Cards</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8; /* Softer light blue-grey background for the page */
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .card-container {
+            display: grid;
+            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            max-width: 1200px;
+            width: 100%;
+        }
+        .card {
+            border-radius: 16px; /* Slightly more rounded corners */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Enhanced shadow for depth */
+            padding: 28px; /* Slightly more padding */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            background-size: 200% 200%; /* For gradient animation */
+            animation: gradient-shift 10s ease infinite alternate; /* Subtle animation */
+        }
+        .card:hover {
+            transform: translateY(-8px) scale(1.02); /* More pronounced lift and subtle scale */
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2); /* Deeper shadow on hover */
+        }
+        .card-title {
+            font-weight: 800; /* Bolder title */
+            font-size: 1.4rem; /* Slightly larger title */
+            color: #2c3e50; /* Darker, more prominent title color */
+            margin-bottom: 18px; /* More space below title */
+            text-shadow: 0 1px 2px rgba(0,0,0,0.05); /* Subtle text shadow */
+        }
+        .card-content p {
+            margin-bottom: 14px; /* More space between paragraphs */
+            line-height: 1.7; /* Increased line height for readability */
+            color: #34495e; /* Slightly darker body text */
+        }
+        .card-content strong {
+            color: #1a2c3c; /* Even darker for strong text */
+        }
+        .text-arabic {
+            font-family: 'Amiri', serif; /* Optional: A more traditional Arabic font if available */
+            text-align: right;
+            font-size: 2.5rem; /* Larger Arabic text */
+            font-weight: bold;
+            margin: 20px 0;
+            color: #1c2c3c;
+            line-height: 1.8;
+        }
+
+        /* Keyframes for subtle gradient animation */
+        @keyframes gradient-shift {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 100% 100%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="card-container" id="duaCardsContainer"></div>
+
+    <script>
+        const duas = [
+            {
+                title: "Dua Card 1",
+                dua: "Read Surah Kahf on Friday.",
+                benefit: "To have noor in face for an entire week."
+            },
+            {
+                title: "Dua Card 2",
+                dua: "Rabbanaa atmim lana noorana waghfir lana innaka 'alaa kulli shay-in qadeer.",
+                note: "(One of my everyday skin care tip)",
+                benefit: "For instant noor in your face!"
+            },
+            {
+                title: "Dua Card 3",
+                dua: "Pray 2 rakats of istikhara when ever u want Allah's suggestion on making simple to complex decisions like for marriage ask if he/she is the right guy/girl, jobs etc. He might show u a dream or guide your mind without you noticing. It may take 1 day or a week to work. Keep patience and trust.",
+                benefit: "For guidance in decision-making (e.g., marriage, jobs)."
+            },
+            {
+                title: "Dua Card 4",
+                dua: "Recite Ayatal kursi after every farj namaj.<br><br>Allahu laaa ilaaha illaa huwal haiyul qai-yoom laa taakhuzuhoo sinatunw wa laa nawm; lahoo maa fissamaamaati wa maa fil ard man zallazee yashfa’u indahooo illaa be iznih ya’lamu maa baina aideehim wa maa khalfahum wa laa yuheetoona beshai ‘immin ‘ilmihee illa be maa shaaaa wasi’a kursiyyuhus samaa waati wal arda wa la ya’ooduho hifzuhumaa wa huwal aliyyul ‘azeem",
+                benefit: "To guarantee Jannah."
+            },
+            {
+                title: "Dua Card 5",
+                dua: "Recite this dua after perfecting your wadu. You can do wudu for no reason and recite it. It will guarantee you Jannah.",
+                duaArabic: "أشهد أن لا إله إلا الله وحده لا شريك له وأشهد أن محمداً عبده ورسوله.",
+                benefit: "To guarantee Jannah."
+            },
+            {
+                title: "Dua Card 6",
+                dua: "Reciting surah ikhlas.<br><br>Qul huwal laahu ahad<br>Allah hus-samad<br>Lam yalid wa lam yoolad<br>Wa lam yakul-lahoo kufuwan ahad",
+                benefit: "Is equal to reading 1/3rd of the Quran. Therefore, reciting it 3x will give u equal reward of reading the whole Quran."
+            },
+            {
+                title: "Dua Card 7",
+                dua: "Recite \"Allahumma inni as'aluk jannata wa'awuzu bika minan-nar\" 6 times. And \"Allahumma ajirni min an-nar\" 7 times a day after prayer.",
+                benefit: "To protect yourself from hellfire (especially after fajr, magrib, and isha)."
+            },
+            {
+                title: "Dua Card 8",
+                dua: "Read Surah Mulk before sleeping.",
+                benefit: "To save yourself from the punishments of graves."
+            },
+            {
+                title: "Dua Card 9",
+                dua: "Recite \"Subhan Allahi wa bihamdih\" 100 times a day.",
+                benefit: "To get your sins forgiven even if u have a lot of them."
+            },
+            {
+                title: "Dua Card 10",
+                dua: "Recite dua before sleeping.",
+                benefit: "If you die in sleep, you will be considered as a person with wadu and will be rewarded."
+            }
+        ];
+
+        const duaCardsContainer = document.getElementById('duaCardsContainer');
+
+        // Define a list of pastel color gradients for the cards
+        const pastelGradients = [
+            'linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%)', // Soft Purple
+            'linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%)', // Gentle Green
+            'linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%)', // Warm Orange
+            'linear-gradient(135deg, #e1f5fe 0%, #bbdefb 100%)', // Cool Blue
+            'linear-gradient(135deg, #fce4ec 0%, #f8bbd0 100%)', // Blush Pink
+            'linear-gradient(135deg, #efebe9 0%, #d7ccc8 100%)'  // Muted Grey/Brown
+        ];
+
+        // Generate cards
+        duas.forEach((duaData, index) => {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.setAttribute('tabindex', '0'); // Make card focusable
+            // Assign gradient cyclically based on the index
+            card.style.backgroundImage = pastelGradients[index % pastelGradients.length];
+
+            const cardTitle = document.createElement('h3');
+            cardTitle.className = 'card-title';
+            cardTitle.textContent = duaData.title;
+            card.appendChild(cardTitle);
+
+            const cardContent = document.createElement('div');
+            cardContent.className = 'card-content';
+            card.appendChild(cardContent);
+
+            const duaParagraph = document.createElement('p');
+            duaParagraph.innerHTML = `<strong>Dua:</strong> ${duaData.dua}`;
+            cardContent.appendChild(duaParagraph);
+
+            if (duaData.note) {
+                const noteParagraph = document.createElement('p');
+                noteParagraph.innerHTML = `<span class="text-sm italic text-gray-600">${duaData.note}</span>`;
+                cardContent.appendChild(noteParagraph);
+            }
+
+            if (duaData.duaArabic) {
+                const arabicDuaParagraph = document.createElement('p');
+                arabicDuaParagraph.className = 'text-arabic'; /* Using a custom class for Arabic styling */
+                arabicDuaParagraph.innerHTML = `<strong>${duaData.duaArabic}</strong>`;
+                cardContent.appendChild(arabicDuaParagraph);
+            }
+
+            const benefitParagraph = document.createElement('p');
+            benefitParagraph.innerHTML = `<strong>Benefit:</strong> ${duaData.benefit}`;
+            cardContent.appendChild(benefitParagraph);
+
+            duaCardsContainer.appendChild(card);
+        });
+
+        // Handle arrow key navigation for cards
+        document.addEventListener('keydown', (e) => {
+            const focusedCard = document.activeElement;
+            if (focusedCard && focusedCard.classList.contains('card')) {
+                const cards = Array.from(duaCardsContainer.children);
+                const currentIndex = cards.indexOf(focusedCard);
+
+                let nextIndex = -1;
+                if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+                    nextIndex = (currentIndex + 1) % cards.length;
+                } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                    nextIndex = (currentIndex - 1 + cards.length) % cards.length;
+                }
+
+                if (nextIndex !== -1) {
+                    cards[nextIndex].focus();
+                    e.preventDefault(); // Prevent page scrolling
+                }
+            }
+        });
+    </script>
+</body>
+</html>
